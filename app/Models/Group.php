@@ -9,7 +9,9 @@ class Group extends Model
 {
     use HasFactory;
 
-    public function users(){
+    public $timestamps = false;
+
+    public function users() {
         return $this->hasMany(User::class);
     }
 }

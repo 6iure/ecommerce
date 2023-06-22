@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTransactionProductsTable extends Migration
+class CreateProductTransactionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateTransactionProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaction_products', function (Blueprint $table) {
+        Schema::create('product_transaction', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Transaction::class);
             $table->foreignIdFor(Product::class);
@@ -33,6 +33,6 @@ class CreateTransactionProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaction_products');
+        Schema::dropIfExists('product_transaction');
     }
 }

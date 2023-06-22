@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StockOperationEnum;
 use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,7 +18,7 @@ class CreateStockOperationsTable extends Migration
         Schema::create('stock_operations', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Product::class);
-            $table->integer('operation_id');
+            $table->enum('operation_id', StockOperationEnum::getValues());
             $table->integer('amount');
             $table->timestamps();
         });

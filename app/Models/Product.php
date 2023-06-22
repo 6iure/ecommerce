@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+
     /**
      * Mostrar que a class de "produtos" pertence a class de categorias.
      *
@@ -22,7 +23,7 @@ class Product extends Model
      *
      * @return void
      */
-    public function images (){
+    public function images() {
         return $this->hasMany(ProductImage::class);
     }
 
@@ -31,7 +32,7 @@ class Product extends Model
      *
      * @return void
      */
-    public function stockOperations () {
+    public function stockOperations() {
         return $this->hasMany(StockOperation::class);
     }
 
@@ -40,9 +41,7 @@ class Product extends Model
      *
      * @return void
      */
-    public function transactions () {
-        return $this->hasMany(Transaction::class);
+    public function transactions() {
+        return $this->belongsToMany(Transaction::class);
     }
-    
-    //TODO hasMany(?);
 }

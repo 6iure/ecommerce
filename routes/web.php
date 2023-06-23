@@ -17,14 +17,9 @@ require __DIR__.'/resources/auth.php';
 
 Route::group(['middleware' => ['auth']], function() {
 
+    require __DIR__.'/resources/home.php';
+
     require __DIR__.'/resources/categories.php';
-
-    Route::group(['middleware' => ['categories']], function() {
-
-        require __DIR__.'/resources/categories.php';
-
-
-    });
 
     //
     /* Route::get('/index', function () {

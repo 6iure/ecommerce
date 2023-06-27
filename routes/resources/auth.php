@@ -15,11 +15,12 @@ Route::group(['middleware' => ['guest']], function() {
 		->name('register');
 
 	Route::post('/register', [AuthController::class, 'register'])
-		->name('register.submit');
+		->name('register.submit');  
 
 });
 
 Route::group(['middleware' => ['auth']], function() {
+
 
 	Route::post('/logout', [AuthController::class, 'logout'])
 		->name('logout');

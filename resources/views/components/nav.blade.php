@@ -21,15 +21,29 @@
 					<li class="nav-item">
 						<a class="nav-link" href="{{ route('register') }}">Register</a>
 					</li>
-					
+
 				@else
 
-					<li class="nav-item">
-						<a class="nav-link" href="{{ route('categories.index') }}">Categorias</a>
+                    <li>
+                        <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
+                    </li>
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="{{ route('categories.index') }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" >Categorias</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href=" {{ route('categories.index') }}">Index</a></li>
+                            <li><a class="dropdown-item" href="//TODO">Produtos</a></li>
+                            <li><a class="dropdown-item" href="//TODO">Imagens dos produtos</a></li>
+                        </ul>
 					</li>
 
+                    <li>
+                        <a class="nav-link" href="{{ route('register') }}">Sair</a>
+                    </li>
+
 				@endif
-				
+
+
 			</ul>
 
 		</div>

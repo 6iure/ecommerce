@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Group;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class GroupSeeder extends Seeder
 {
@@ -13,6 +16,18 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
-        //
+
+        $names = [
+            'Manager',
+            'Admin',
+            'Customer'
+        ];
+
+        foreach ($names as $name) {
+            $group = new Group();
+            $group->name = $name;
+            $group->save();
+
+        }
     }
 }

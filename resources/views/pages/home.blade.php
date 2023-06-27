@@ -3,7 +3,7 @@
 @section('content')
 
 	<div id="home-page" class="page">
-		<h1>dashboard</h1>
+		<h1>Você está logado</h1>
 	</div>
 
 @endsection

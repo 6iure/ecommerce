@@ -25,11 +25,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     require __DIR__.'/resources/categories.php';
 
-    Route::get('dashboard', [HomeController::class, 'index']);
-
-    Route::get('logout', [LoginController::class, 'register']);
-
-
     //Route::get('categories', [CategoryController::class, 'index'] );
 
 

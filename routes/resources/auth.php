@@ -21,8 +21,7 @@ Route::group(['middleware' => ['guest']], function() {
 
 Route::group(['middleware' => ['auth']], function() {
 
-
-	Route::post('/logout', [AuthController::class, 'logout'])
+	Route::get('/logout', [AuthController::class, 'logout'])
 		->name('logout');
 
 });

@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Exists;
 use Illuminate\Validation\Rules\Unique;
 
 
@@ -22,6 +23,12 @@ class AuthController extends Controller
 
     public function login(Request $request) {
 
+        $user = User::find(1);
+
+        Auth::login($user);
+
+        return redirect('/dashboard');
+
         $validator = Validator::make($request->all(),[
             'email' => ['required, string'],
             'password' => ['required', 'string', 'min:6']
@@ -35,19 +42,22 @@ class AuthController extends Controller
 
         } else {
 
+            // TODO Está errado porque está criando um novo usuário!
             $user = New User();
             $user->email = $request->email;
             $user->password = $request->password;
             $user->save();
 
+            // TODO: O que deve ser feito
+            // 1. Verificar se o usuário do $request->email existe
+            // 2. Verificar se a $request->password é igual a senha do usuário
+            // 3. Fazer login
+
             Auth::login($user);
 
             return redirect()->route('dashboard');
-
-
-            }
-
         }
+    }
 
     public function showRegisterForm(): View {
 
@@ -71,7 +81,7 @@ class AuthController extends Controller
     public function register(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'group_id' => ['required', 'string'],
+            'group_id' => ['required', 'integer', new Exists(Group::class, 'id')],
             'name' => ['required', 'string'],
             'email' => ['required', 'string', 'email', new Unique(User::class, 'email')],
             'cpf' => ['required', 'string', new Unique(User::class, 'cpf')],
@@ -103,8 +113,8 @@ class AuthController extends Controller
     public function logout(Request $request) {
 
         Auth::logout();
-        return redirect('/register');
 
+        return redirect('/register');
     }
 }
 

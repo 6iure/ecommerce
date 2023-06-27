@@ -38,7 +38,7 @@
 					</li>
 
                     <li>
-                        <a class="nav-link" href="{{ route('register') }}">Sair</a>
+                        <a class="nav-link" href="{{ route('logout') }}">Sair</a>
                     </li>
 
 				@endif

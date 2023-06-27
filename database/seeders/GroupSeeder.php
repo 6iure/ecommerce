@@ -16,10 +16,9 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
-
         $names = [
-            'Manager',
             'Admin',
+            'Manager',
             'Customer'
         ];
 
@@ -27,7 +26,6 @@ class GroupSeeder extends Seeder
             $group = new Group();
             $group->name = $name;
             $group->save();
-
         }
     }
 }

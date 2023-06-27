@@ -15,16 +15,13 @@
                 <input type="text" class="form-control" name="name" value="{{ old('name') }}" />
             </div>
 
-            <select class="form-select mb-3" aria-label="Default select example">
-                <label>Grupo</label>
-                <option value="1">Admin</option>
-                <option value="2">Manager</option>
-                <option value="3">Customer</option>
-            </select>
-
             <div class="form-group mb-3">
-                <label>Group ID</label>
-                <input type="text" class="form-control" name="group_id" value="{{ old('group_id') }}"  />
+                <label>Grupo</label>
+                <select name="group_id" class="form-select mb-3">
+                    <option value="1">Admin</option>
+                    <option value="2">Manager</option>
+                    <option value="3">Customer</option>
+                </select>
             </div>
 
             <div class="form-group mb-3">

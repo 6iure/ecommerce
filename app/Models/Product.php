@@ -44,4 +44,14 @@ class Product extends Model
     public function transactions() {
         return $this->belongsToMany(Transaction::class);
     }
+
+    protected $table = 'products';
+
+    protected $fillable = [
+        'id',
+        'name',
+        'description',
+        'price',
+        'current_stock'
+    ];
 }

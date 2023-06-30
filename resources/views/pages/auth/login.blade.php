@@ -24,12 +24,12 @@
                                     <h3 class="mb-5">Log in</h3>
 
                                     <div class="form-outline mb-4">
-                                        <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
+                                        <input type="email" name="email" id="typeEmailX-2" class="form-control form-control-lg" />
                                         <label class="form-label" for="typeEmailX-2">Email</label>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
+                                        <input type="password" name="password" id="typePasswordX-2" class="form-control form-control-lg" />
                                         <label class="form-label" for="typePasswordX-2">Senha</label>
                                     </div>
 

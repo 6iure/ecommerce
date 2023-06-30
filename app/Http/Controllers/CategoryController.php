@@ -2,19 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    private function form($category) {
+
+        $data = [
+            'category' => $category,
+        ];
+
+        //TODO criar view do form do category
+        return view('', $data);
+
+    }
+
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource e trazendo os dados para a view.
      *
      * @return View
      */
     public function index(): View
     {
-        return view('pages.categories.index');
+        $categories = Category::all();
+
+        $data = [
+            'categories' => $categories,
+        ];
+
+        return view('pages.categories.index', $data);
     }
 
     /**
@@ -22,9 +42,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+
+        $category = New Category();
+
+        return $this->form($category);
     }
 
     /**
@@ -33,10 +55,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -57,7 +76,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return $this->form($category);
     }
 
     /**
@@ -67,9 +87,8 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id) {
+
     }
 
     /**

@@ -7,67 +7,33 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Exists;
 use Illuminate\Validation\Rules\Unique;
 
+class AuthController extends Controller {
 
-
-class AuthController extends Controller
-{
-    //
     public function showLoginForm(): View {
-
         return view('pages.auth.login');
     }
 
     public function login(Request $request) {
 
-        $user = User::find(1);
+        //Pegar o email do usuaŕio no DB
+        $user = User::where('email', $request->email)->first();
 
-        Auth::login($user);
-
-        return redirect('/dashboard');
-
-        $validator = Validator::make($request->all(),[
-            'email' => ['required, string'],
-            'password' => ['required', 'string', 'min:6']
-        ]);
-
-        if ($validator->fails()) {
-
-            return back()
-                ->withInput()
-                ->withErrors($validator->errors());
-
+        //Checar se a senha confere
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            echo 'Senha invalida';
         } else {
-
-            // TODO Está errado porque está criando um novo usuário!
-            $user = New User();
-            $user->email = $request->email;
-            $user->password = $request->password;
-            $user->save();
-
-            // TODO: O que deve ser feito
-            // 1. Verificar se o usuário do $request->email existe
-            // 2. Verificar se a $request->password é igual a senha do usuário
-            // 3. Fazer login
-
             Auth::login($user);
-
-            return redirect()->route('dashboard');
+            return redirect('/dashboard');
         }
+
     }
 
     public function showRegisterForm(): View {
-
-        /* TODO
-            1. criar seeder de grupos -> OK
-            2. enviar grupos para a tela do register -> OK
-            3. criar select de grupos no form de register -> ok
-            4. testar inserção usuário -> Ok ? Pergunta: Estou com duvidas para deslogar o usuario, pois quando consigo dar login uma vez, não é possivel voltar a pagina de se registrar.
-            5. quando voltar pro form por conta de erros, tem que preencher os inputs -> OK
-        */
 
         $groups = Group::all();
 
@@ -84,7 +50,7 @@ class AuthController extends Controller
             'group_id' => ['required', 'integer', new Exists(Group::class, 'id')],
             'name' => ['required', 'string'],
             'email' => ['required', 'string', 'email', new Unique(User::class, 'email')],
-            'cpf' => ['required', 'string', new Unique(User::class, 'cpf')],
+            'cpf' => ['required', 'string', 'min:11', 'max:11', new Unique(User::class, 'cpf')],
             'password' => ['required', 'string', 'min:6']
         ]);
 
@@ -101,7 +67,7 @@ class AuthController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->cpf = $request->cpf;
-            $user->password = $request->password;
+            $user->password = bcrypt($request->password);
             $user->save();
 
             Auth::login($user);
@@ -114,7 +80,7 @@ class AuthController extends Controller
 
         Auth::logout();
 
-        return redirect('/register');
+        return redirect('/logout');
     }
 }
 

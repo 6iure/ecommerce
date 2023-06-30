@@ -18,9 +18,12 @@
             <div class="form-group mb-3">
                 <label>Grupo</label>
                 <select name="group_id" class="form-select mb-3">
-                    <option value="1">Admin</option>
-                    <option value="2">Manager</option>
-                    <option value="3">Customer</option>
+
+                    <option value="">Selecione uma opção</option>
+
+                    @foreach ($groups as $group)
+                    <option value="{{$group->id}}">{{$group->name}}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -31,7 +34,7 @@
 
             <div class="form-group mb-3">
                 <label>CPF</label>
-                <input type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" />
+                <input type="text" class="form-control" name="cpf" maxlength="11" value="{{ old('cpf') }}" />
             </div>
 
             <div class="form-group mb-3">

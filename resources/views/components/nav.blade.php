@@ -28,14 +28,23 @@
                         <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
                     </li>
 
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="{{ route('categories.index') }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true" >Categorias</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href=" {{ route('categories.index') }}">Index</a></li>
-                            <li><a class="dropdown-item" href="//TODO">Produtos</a></li>
-                            <li><a class="dropdown-item" href="//TODO">Imagens dos produtos</a></li>
+
+                    <li>
+                        <a class="nav-link" href="{{ route('categories.index') }}">Categorias</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Produtos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                          <li><a class="dropdown-item" href="{{ route('products.index') }}">Produtos</a></li>
+                          <li><a class="dropdown-item" href="{{ route('productimages.index') }}">Imagens de produtos</a></li>
+                          <li><a class="dropdown-item" href="#">Transações</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Transações de produtos</a></li>
                         </ul>
-					</li>
+                      </li>
 
                     <li>
                         <a class="nav-link" href="{{ route('logout') }}">Sair</a>

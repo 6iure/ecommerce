@@ -25,6 +25,11 @@ Route::group(['middleware' => ['auth']], function() {
 
     require __DIR__.'/resources/categories.php';
 
+    require __DIR__.'/resources/products.php';
+
+    require __DIR__.'/resources/productimages.php';
+
+
     //Route::get('categories', [CategoryController::class, 'index'] );
 
 

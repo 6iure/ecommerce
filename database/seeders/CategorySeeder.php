@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class CategorySeeder extends Seeder
 {
@@ -13,6 +14,11 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Category::create([
+
+            'id' => '1',
+            'name' => Hash::make('name')
+
+        ]);
     }
 }

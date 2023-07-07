@@ -8,14 +8,13 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller {
 
-    private function form($product) {
+    private function form($product):View {
 
         $data = [
             'product' => $product,
         ];
 
-        //TODO criar view do form product
-        return view('', $data);
+        return view('pages.products.form', $data);
     }
 
 
@@ -37,5 +36,42 @@ class ProductController extends Controller {
         $product = New Product();
 
         return $this->form($product);
+    }
+
+    public function edit (Request $request, int $id) {
+
+        $product = Product::find($id);
+
+        if ($product) {
+
+            return $this->form($product);
+        }
+        else {
+            return back()->withErrors('Produto não encontrado');
+        }
+    }
+
+    public function update () {
+
+    }
+
+    public function delete (Request $request) {
+
+        $id = $request->id;
+
+        if ($id) {
+
+            $product = Product::find($id);
+
+            if($product) {
+
+                //Deletar
+                $product->delete();
+
+                return back()->with('success', 'O produto foi deletado!');
+            } else {
+
+            }
+        }
     }
 }

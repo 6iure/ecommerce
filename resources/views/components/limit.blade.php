@@ -5,7 +5,7 @@
 @endphp
 
 <div class="form-group">
-    <label for="">Qtde. de registros por página </label>
+    <label for="">Registros por página </label>
 
     <select name="limit" id="" class="form-select">
 

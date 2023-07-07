@@ -2,23 +2,23 @@
 
 @section('content')
 
-    <div class="page page-categories page-form" >
+    <div class="page page-products page-form" >
 
         @include('components.alert')
 
-       <h1>Formulário de Categorias</h1>
+       <h1>Formulário de Produtos</h1>
        <h1>{{ $title ?? '' }}</h1>
 
-        <form method="POST" action="{{ url('/categories') }}">
+        <form method="POST" action="{{ url('/products') }}">
 
             @csrf
 
-            @method($category->id ? 'PUT' : 'POST')
+            @method($product->id ? 'PUT' : 'POST')
 
-            <input type="hidden" name ="id" value="{{ $category->id }}">
+            <input type="hidden" name ="id" value="{{ $product->id }}">
 
             {{-- <div class="form-group">
-                <label for="">Categorias</label>
+                <label for="">Produtos</label>
                 <select name="name" id="" class="form-select" required >
                     <option value="">Selecione uma opção</option>
                     @foreach ($names as $name)
@@ -27,7 +27,7 @@
                 </select>
             </div> --}}
 
-            <a class="btn btn-secondary" href="{{ url('/categories') }}">Voltar</a>
+            <a class="btn btn-secondary" href="{{ url('/products') }}">Voltar</a>
 
             <button class="btn btn-primary" type="submit">Enviar</button>
 

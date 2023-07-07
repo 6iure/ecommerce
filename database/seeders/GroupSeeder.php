@@ -16,6 +16,7 @@ class GroupSeeder extends Seeder
      */
     public function run()
     {
+
         $names = [
             'Admin',
             'Manager',

@@ -39,7 +39,7 @@
 
                                 <div class="buttons d-flex">
 
-                                    <a class="btn btn-sm btn-primary me-3 " href="{{ url('/product/'.$product->id .'/editar') }}">Editar categoria</a>
+                                    <a class="btn btn-sm btn-primary me-3 " href="{{ url('/product/'.$product->id .'/editar') }}">Editar produto</a>
 
                                     @include('components.delete', [
                                         'url' => '/product',

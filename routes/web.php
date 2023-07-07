@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,44 +30,43 @@ Route::group(['middleware' => ['auth']], function() {
 
     require __DIR__.'/resources/productimages.php';
 
+    require __DIR__.'/resources/transactions.php';
 
-    //Route::get('categories', [CategoryController::class, 'index'] );
 
+    Route::get('upload/image', [ProductImageController::class, 'ImageUpload'])->name('ImageUpload');
 
-    //  Route::get('/index', function () {
-    //     return view('index');
-    // });
-
-    // Route::get('/users', function () {
-    //     return view('users');
-    // });
-
-    // Route::get('/categories', function () {
-    //     return view('categories');
-    // });
-
-    // Route::get('/products', function() {
-    //     return view('products');
-    // });
-
-    // Route::get('images', function() {
-    //     return view('images');
-    // });
-
-    // Route::get('operations', function () {
-    //     return view('operations');
-    // });
-
-    // Route::get('transactions', function() {
-    //     return view('transactions');
-    // });
-
-    // Route::get('tproducts', function() {
-    //     return view('tproducts');
-    // });
-
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->middleware(['auth'])->name('dashboard');
+    Route::post('upload/image',[ProductImageController::class, 'ImageUploadStore'])->name('ImageUploadStore');
 
 });
+
+Route::group([], function() {
+
+//Visualizar formulario para editar as categorias
+Route::get('category/{id}/editar', ['uses' => 'App\Http\Controllers\CategoryController@edit', 'role' => 'category.update']);
+
+//Atualizar uma categoria
+Route::put('category', ['uses' => 'App\Http\Controllers\CategoryController@update', 'role' => 'category.update']);
+
+//Remover uma categoria
+Route::delete('category', ['uses' => 'App\Http\Controllers\CategoryController@delete', 'role' => 'category.delete']);
+
+});
+
+Route::group([], function() {
+
+   //Visualizar form para editar os produtos
+   Route::get('product/{id}/editar', ['uses' => 'App\Http\Controllers\ProductController@edit', 'role' => 'product.update']) ;
+
+   //Atualizar produto
+   Route::put('product', ['uses' => 'App\Http\Controllers\ProductController@edit', 'role' => 'product.update']);
+
+   //REmover uma produto
+   Route::delete('product', ['uses' => 'App\Http\Controllers\ProductController@delete', 'role' => 'product.delete']);
+
+});
+
+// Route::group([], function(){
+
+//     Route::store()
+
+// });

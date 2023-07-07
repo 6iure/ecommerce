@@ -22,7 +22,7 @@
                     <option value="">Selecione uma opção</option>
 
                     @foreach ($groups as $group)
-                    <option value="{{$group->id}}">{{$group->name}}</option>
+                        <option value="{{$group->id}}">{{$group->name}}</option>
                     @endforeach
                 </select>
             </div>

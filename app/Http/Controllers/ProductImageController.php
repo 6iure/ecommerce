@@ -30,4 +30,24 @@ class ProductImageController extends Controller {
 
     }
 
+    public function ImageUpload() {
+
+        return view('index');
+    }
+
+    public function ImageUploadStore(Request $request) {
+
+        $request->validate([
+
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $imageName = time().'.'.$request->image->extension();
+
+        $request->image->move(public_path('images'), $imageName);
+
+        return back()
+            ->with('Sucesso', 'O upload da imagem foi feito.')
+            ->with('image', $imageName);
+    }
 }

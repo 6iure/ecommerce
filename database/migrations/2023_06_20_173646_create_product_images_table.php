@@ -20,8 +20,8 @@ class CreateProductImagesTable extends Migration
             $table->integer('size');
             $table->integer('width');
             $table->integer('height');
-            $table->integer('mimetype');
-            $table->integer('path');
+            $table->string('mimetype');
+            $table->string('path');
             $table->timestamps();
         });
     }

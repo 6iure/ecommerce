@@ -9,14 +9,15 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
 
-    private function form($category) {
+    private function form(Category $category): View {
+
+
 
         $data = [
             'category' => $category,
         ];
 
-        //TODO criar view do form do category
-        return view('', $data);
+        return view('pages.categories.form', $data);
 
     }
 
@@ -42,7 +43,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create(Request $request) {
 
         $category = New Category();
 
@@ -55,17 +56,8 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {}
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function insert(Request $request) {
+        return $this->store($request);
     }
 
     /**
@@ -74,10 +66,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, int $id)
     {
         $category = Category::find($id);
-        return $this->form($category);
+
+        if ($category) {
+
+            return $this->form($category);
+        }
+        else {
+            return back()-> withErrors('Categoria não encontrada');
+        }
+
     }
 
     /**
@@ -97,8 +97,22 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function delete(Request $request) {
+
+        $id = $request->id;
+
+        if($id) {
+
+            $category = Category::find($id);
+
+            if($category){
+
+                //Deletar
+                $category->delete();
+
+                return back()->with('success', 'A categoria foi deletada');
+
+            }
+        }
     }
 }

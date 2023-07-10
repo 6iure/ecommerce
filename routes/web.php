@@ -28,23 +28,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     require __DIR__.'/resources/transactions.php';
 
-
     Route::get('upload/image', [ProductImageController::class, 'ImageUpload'])->name('ImageUpload');
 
     Route::post('upload/image',[ProductImageController::class, 'ImageUploadStore'])->name('ImageUploadStore');
-
-});
-
-Route::group([], function() {
-
-//Visualizar formulario para editar as categorias
-Route::get('category/{id}/editar', ['uses' => 'App\Http\Controllers\CategoryController@edit', 'role' => 'category.update']);
-
-//Atualizar uma categoria
-Route::put('category', ['uses' => 'App\Http\Controllers\CategoryController@update', 'role' => 'category.update']);
-
-//Remover uma categoria
-Route::delete('category', ['uses' => 'App\Http\Controllers\CategoryController@delete', 'role' => 'category.delete']);
 
 });
 

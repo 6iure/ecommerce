@@ -1,31 +1,40 @@
-@php
-
-    $list = [];
-
-        foreach ($columns as $key => $value) {
-
-            array_push($list,
-            ['value' => $key. '.asc', 'text' => $value.' crescente'],
-            ['value' => $key. '.desc', 'text' => $value.' decrescente'],
-        );
-    }
-
-    $selected = Request::get('sort', $list[0]['value']);
-
-@endphp
+@props([
+    'list' => []
+])
 
 <div class="form-group">
 
     <label for="">Ordenação</label>
 
-    <select name="sort" id="" class="form-select">
+    <div class="row">
 
-        @foreach ($list as $item)
+        <div class="col-6">
 
-            <option value="{{ $item['value'] }}" {{$item['value'] == $selected ? 'selected' : ''}} >{{ $item['text'] }}</option>
+            <select name="sort_column" id="" class="form-select">
+        
+                @foreach ($list as $value => $label)
+        
+                    <option value="{{ $value }}" {{ $value == Request::get('sort_column') ? 'selected' : ''}} >{{ $label }}</option>
+        
+                @endforeach
+        
+            </select>
 
-        @endforeach
+        </div>
 
-    </select>
+        <div class="col-6">
+
+            <select name="sort_direction" id="" class="form-select">
+
+                <option value="asc" {{ Request::get('sort_direction') == 'asc' ? 'selected' : '' }}>Crescente</option>
+
+                <option value="desc" {{ Request::get('sort_direction') == 'desc' ? 'selected' : '' }}>Decescente</option>
+        
+            </select>
+
+        </div>
+
+    </div>
+
 
 </div>

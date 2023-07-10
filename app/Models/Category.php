@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Category extends Model
 {
@@ -20,4 +21,12 @@ class Category extends Model
         'name',
     ];
 
+    public function scopeSearch($query, Request $request) {
+
+        // TODO fazer filtros, joins, selects, etc...
+
+        if ($request->name) {
+            $query->where('name', $request->name);
+        }
+    }
 }

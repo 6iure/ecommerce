@@ -1,10 +1,10 @@
-@php
-    $list = [10, 25, 50, 100];
-    $selected = Request::get('limit', $list[0]);
-
-@endphp
+@props([
+    'list' => [10, 25, 50, 100],
+    'selected' => Request::get('limit')
+])
 
 <div class="form-group">
+    
     <label for="">Registros por página </label>
 
     <select name="limit" id="" class="form-select">

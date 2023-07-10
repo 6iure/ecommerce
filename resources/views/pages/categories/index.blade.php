@@ -10,49 +10,59 @@
 
         @include('pages.categories.filters')
 
-        <div class="table-responsive">
+        <x-btn-create :route="route('categories.create')">Criar categoria</x-btn-create>
 
+        @if ($categories->count() > 0)
 
-            <table class="table table-striped mt-3">
+            <div class="table-responsive">
 
-                <thead class="table">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                    </tr>
-                </thead>
+                <table class="table table-striped mt-3">
 
-                <tbody>
-                    @foreach ($categories as $category)
-
+                    <thead class="table">
                         <tr>
-                            <td>{{ $category->id }}</td>
-                            <td>{{ $category->name }}</td>
-
-                            <td>
-
-                                <div class="buttons d-flex">
-
-                                    <a class="btn btn-sm btn-primary me-3 " href="{{ url('/category/'.$category->id .'/editar') }}">Editar categoria</a>
-
-                                    @include('components.delete', [
-                                        'url' => '/category',
-                                        'id' => $category->id,
-                                        'text' => 'Remover categoria',
-                                    ])
-
-                                </div>
-
-                            </td>
-
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Dt. criação</th>
+                            <th>Ações</th>
                         </tr>
+                    </thead>
 
-                    @endforeach
+                    <tbody>
 
-                </tbody>
-            </table>
+                        @foreach ($categories as $category)
 
-        </div>
+                            <tr>
+
+                                <td>{{ $category->id }}</td>
+                                <td>{{ $category->name }}</td>
+                                <td>{{ $category->created_at }}</td>
+                                <td>
+
+                                    <x-buttons>
+
+                                        <x-btn-edit :route="route('categories.edit', ['category' => $category->id])">Editar categoria</x-btn-edit>
+
+                                        <x-btn-delete :route="route('categories.destroy', ['category' => $category->id])">Remover categoria</x-btn-delete>
+
+                                    </x-buttons>
+
+                                </td>
+
+                            </tr>
+
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+                {!! $categories->appends(Request::except('page'))->links() !!}
+
+            </div>
+            
+        @else
+            <x-empty-message />
+        @endif
+
     </div>
 
 @endsection

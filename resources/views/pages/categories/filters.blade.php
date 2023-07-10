@@ -1,4 +1,4 @@
-<form method="GET" action="{{ url('/categories') }}">
+<form method="GET" action="{{ route('categories.index') }}" class="mb-3">
 
     <div class="row">
 
@@ -10,17 +10,22 @@
         </div>
 
         <div class="col-3">
-                @include('components.limit')
+            <x-limit></x-limit>
         </div>
-
 
         <div class="col-3">
 
-            @include('components.sort', [
-                'columns' => [
+            @php
+                $sortList = [
                     'id' => 'Id',
-                ]
-            ])
+                    'name' => 'Nome',
+                    'created_at' => 'Data de criação',
+                ];
+            @endphp
+
+            <x-sort
+                :list="$sortList"
+            ></x-sort>
 
         </div>
 

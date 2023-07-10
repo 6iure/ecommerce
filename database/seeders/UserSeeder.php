@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -15,12 +13,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-
         \App\Models\User::create([
-
-            'email' => 'teste@email',
-            'password' => Hash::make('senha')
-
+            'name' => 'Iure',
+            'cpf' => '123.456.789-00',
+            'email' => 'iure@sysout.com.br',
+            'password' => bcrypt('sysout')
         ]);
     }
 }

@@ -7,29 +7,46 @@
         @include('components.alert')
 
        <h1>Formulário de Produtos</h1>
-       <h1>{{ $title ?? '' }}</h1>
 
-        <form method="POST" action="{{ url('/products') }}">
+       @php
+
+            $method = $product->id ? 'PUT' : 'POST';
+
+            $route = $product->id ?
+                route('products.update', $product->id) :
+                route('products.store');
+
+       @endphp
+
+        <form method="POST" action="{{ $route }}">
 
             @csrf
 
-            @method($product->id ? 'PUT' : 'POST')
+            @method($method)
 
-            <input type="hidden" name ="id" value="{{ $product->id }}">
+            <div class="form-group mb-3">
 
-            {{-- <div class="form-group">
-                <label for="">Produtos</label>
-                <select name="name" id="" class="form-select" required >
-                    <option value="">Selecione uma opção</option>
-                    @foreach ($names as $name)
-                        <option value="{{ $name->id }}" {{ $name->id == old('name_id', $category->name_id) ? 'selected' : '' }} ></option>
-                    @endforeach
-                </select>
-            </div> --}}
+                <label for="">Nome</label>
+                <input type="text" name="name" class="form-control" value="{{ old('name', $product->name) }}" maxlength="100" required />
 
-            <a class="btn btn-secondary" href="{{ url('/products') }}">Voltar</a>
+                <label for="">Descriçao</label>
+                <input type="text" name="description" class="form-control" value="{{ old('description', $product->description) }}" maxlength="180" required />
 
-            <button class="btn btn-primary" type="submit">Enviar</button>
+                <label for="">Preço</label>
+                <input type="number" name="price" class="form-control" value="{{ old('price', $product->price) }}" required />
+
+                <label for="">Quantidade no estoque</label>
+                <input type="number" name="current_stock" class="form-control" value="{{ old('current_stock', $product->current_stock) }}" required />
+
+            </div>
+
+            <x-buttons>
+
+                <a class="btn btn-secondary" href="{{ route('products.index') }}">Voltar</a>
+
+                <button class="btn btn-primary" type="submit">Enviar</button>
+
+            </x-buttons>
 
         </form>
     </div>

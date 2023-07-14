@@ -23,7 +23,7 @@
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Dt. criação</th>
-                            <th>Ações</th>
+                            <th>Açoẽs</th>
                         </tr>
                     </thead>
 
@@ -36,6 +36,7 @@
                                 <td>{{ $category->id }}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->created_at }}</td>
+
                                 <td>
 
                                     <x-buttons>

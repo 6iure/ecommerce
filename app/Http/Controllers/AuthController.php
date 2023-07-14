@@ -7,33 +7,43 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Exists;
 use Illuminate\Validation\Rules\Unique;
 
-class AuthController extends Controller {
+class AuthController extends Controller
+{
 
-    public function showLoginForm(): View {
+    public function showLoginForm(): View
+    {
         return view('pages.auth.login');
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
 
-        //Pegar o email do usuaŕio no DB
-        $user = User::where('email', $request->email)->first();
+        $validator = Validator::make($request->all(), [
 
-        //Checar se a senha confere
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            echo 'Senha invalida';
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string', 'min:6']
+        ]);
+
+        if ($validator->fails()) {
+
+            return back()
+                ->withInput()
+                ->withErrors($validator->errors());
         } else {
-            Auth::login($user);
-            return redirect('/dashboard');
-        }
 
+            $user = User::where('email', $request->email)->first();
+
+            Auth::login($user);
+            return redirect('/categories');
+        }
     }
 
-    public function showRegisterForm(): View {
+    public function showRegisterForm(): View
+    {
 
         $groups = Group::all();
 
@@ -44,7 +54,8 @@ class AuthController extends Controller {
         return view('pages.auth.register', $data);
     }
 
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'group_id' => ['required', 'integer', new Exists(Group::class, 'id')],
@@ -59,7 +70,6 @@ class AuthController extends Controller {
             return back()
                 ->withInput()
                 ->withErrors($validator->errors());
-
         } else {
 
             $user = new User();
@@ -72,15 +82,15 @@ class AuthController extends Controller {
 
             Auth::login($user);
 
-            return redirect()->route('dashboard');
+            return redirect()->route('categories.index');
         }
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
 
         Auth::logout();
 
         return redirect('/logout');
     }
 }
-

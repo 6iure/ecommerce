@@ -32,3 +32,17 @@
     </div>
 
 @endif
+
+
+{{-- @props([
+    'route',
+])
+
+<form action="{{ $route }}" method="POST">
+
+    @csrf
+
+    @method('ALERT')
+
+
+</form> --}}

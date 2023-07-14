@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductImage;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductImageController extends Controller {
 
@@ -43,6 +44,8 @@ class ProductImageController extends Controller {
         ]);
 
         $imageName = time().'.'.$request->image->extension();
+
+        $request->image->
 
         $request->image->move(public_path('images'), $imageName);
 

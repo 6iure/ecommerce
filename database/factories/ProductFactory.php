@@ -14,7 +14,11 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            //
+            // 'category_id' => $this->faker->numerify(),
+            'name' => $this->faker->safeColorName(),
+            'description' => $this->faker->safeColorName(),
+            'price' => $this->faker->numerify(),
+            'current_stock' => $this->faker->numerify()
         ];
     }
 }

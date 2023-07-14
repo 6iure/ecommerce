@@ -16,9 +16,9 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Category::class);
-            $table->string('name');
-            $table->string('description')->nullable();
+            $table->foreignIdFor(Category::class)->nullable();
+            $table->string('name', 100);
+            $table->string('description', 180);
             $table->integer('price');
             $table->integer('current_stock')->default(0);
             $table->timestamps();

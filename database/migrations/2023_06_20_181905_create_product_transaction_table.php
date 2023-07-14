@@ -17,10 +17,10 @@ class CreateProductTransactionTable extends Migration
     {
         Schema::create('product_transaction', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Transaction::class);
-            $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(Transaction::class)->nullable();
+            $table->foreignIdFor(Product::class)->nullable();
             $table->integer('amount');
-            $table->float('price');
+            $table->float('price'); //todo mudar todos os preços para double em vez de int
             $table->float('total');
             $table->timestamps();
         });

@@ -14,7 +14,9 @@ class TransactionProductFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'amount' => $this->faker->numerify(),
+            'price' => $this->faker->numerify(),
+            'total' => $this->faker->numerify()
         ];
     }
 }

@@ -13,11 +13,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // \App\Models\User::create([
+        //     'name' => 'Iure',
+        //     'cpf' => '123.456.999-00',
+        //     'email' => 'iure@iure.com.br',
+        //     'password' => bcrypt('sysout')
+        // ]);
+
         \App\Models\User::create([
             'name' => 'Iure',
-            'cpf' => '123.456.789-00',
-            'email' => 'iure@sysout.com.br',
+            'cpf' => '123.456.100-00',
+            'email' => 'iure@sysout.com',
             'password' => bcrypt('sysout')
         ]);
+
     }
 }

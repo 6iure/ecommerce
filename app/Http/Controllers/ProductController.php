@@ -4,74 +4,198 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Validator as ValidationValidator;
 
-class ProductController extends Controller {
+/**
+ * Product controller
+ *
+ * @author Iure Santiago <iure@sysout.com>
+ * @since 10/07/23
+ * @version 1.0.0
+ *
+ */
 
-    private function form($product):View {
+ class ProductController extends Controller
+{
 
-        $data = [
-            'product' => $product,
-        ];
+    /**
+     * Listar todos os produtos
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request):View {
 
-        return view('pages.products.form', $data);
-    }
-
-
-
-    public function index():View {
-
-        $products = Product::all();
+        $products = Product::search($request)
+            ->orderBy('id', 'asc')
+            ->paginate(
+                $request->get('limit', 10)
+        );
 
         $data = [
             'products' => $products
         ];
 
         return view('pages.products.index', $data);
-
     }
 
-    public function create() {
+    /**
+     * Exibir formulário para criar um novo produto
+     *
+     * @return void
+     */
+    public function create(): View {
 
-        $product = New Product();
+        $product = new Product();
 
         return $this->form($product);
     }
 
-    public function edit (Request $request, int $id) {
+    /**
+     * Criar produto
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse {
 
-        $product = Product::find($id);
+        $product = new Product();
 
-        if ($product) {
-
-            return $this->form($product);
-        }
-        else {
-            return back()->withErrors('Produto não encontrado');
-        }
-    }
-
-    public function update () {
+        return $this->storeOrUpdate($product, $request);
 
     }
 
-    public function delete (Request $request) {
+    /**
+     * Exibir form pra editar produto
+     *
+     * @param Product $product
+     * @return View
+     */
+    public function edit(Product $product):View {
 
-        $id = $request->id;
+        return $this->form($product);
 
-        if ($id) {
+    }
 
-            $product = Product::find($id);
+    /**
+     * Editar produto
+     *
+     * @param Product $product
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function update(Product $product, Request $request): RedirectResponse {
 
-            if($product) {
+        return $this->storeOrUpdate($product, $request);
 
-                //Deletar
-                $product->delete();
+    }
 
-                return back()->with('success', 'O produto foi deletado!');
-            } else {
+    /**
+     * Deletar um produto
+     *
+     * @param Product $product
+     * @return RedirectResponse
+     */
+    public function destroy(Product $product): RedirectResponse {
 
-            }
+        $product->delete();
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Produto deletado com sucesso');
+    }
+
+    /**
+     * Exibir formulario para criar/editar produto
+     *
+     * @param Product $product
+     * @return View
+     */
+    private function form(Product $product):View {
+
+        //Variaveis que serao utilizadas na view
+        $data = [
+            'product' => $product
+        ];
+
+        return view('pages.products.form', $data);
+    }
+
+    /**
+     * Criar ou editar um produto
+     *
+     * @param Product $product
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    private function storeOrUpdate(Product $product, Request $request): RedirectResponse {
+
+        $validator = $this->validator($request);
+
+        if($validator->fails()) {
+
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
         }
+
+        $this->save($product, $request);
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Produto salvo com sucesso!');
+
+    }
+
+    /**
+     * Criar validator de criação/ediçao de produto
+     *
+     * @param Request $request
+     * @return ValidationValidator
+     */
+    private function validator(Request $request):ValidationValidator {
+
+        $data = $request->all();
+
+        $rules = [
+            'name' => ['required', 'string', 'max:100'],
+            'description' => ['required', 'string', 'max:180'],
+            'price' => ['required', 'integer'],
+            'current_stock' => ['required', 'integer'],
+        ];
+
+        $validator = Validator::make($data, $rules);
+
+        $validator->after(function($validator) use($request) {
+
+            //TODO validacoes mais complexas
+
+        });
+
+        return $validator;
+    }
+
+    /**
+     * Salvar um produto
+     *
+     * @param Product $product
+     * @param Request $request
+     * @return void
+     */
+    private function save(Product $product, Request $request) {
+
+        $product->name = $request->name;
+
+        $product->description = $request->description;
+
+        $product->price = $request->price;
+
+        $product->current_stock = $request->current_stock;
+
+        $product->save();
     }
 }

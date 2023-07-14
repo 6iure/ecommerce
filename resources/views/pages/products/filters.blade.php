@@ -1,4 +1,4 @@
-<form method="GET" action="{{ url('/products') }}">
+<form method="GET" action="{{ route('products.index') }}" class="mb-3">
 
     <div class="row">
 
@@ -10,17 +10,26 @@
         </div>
 
         <div class="col-3">
-                @include('components.limit')
+                <x-limit></x-limit>
         </div>
 
 
         <div class="col-3">
 
-            @include('components.sort', [
-                'columns' => [
+            @php
+                $sortList = [
                     'id' => 'Id',
-                ]
-            ])
+                    'name' => 'Nome',
+                    'description' => 'Descrição',
+                    'price' => 'Preço',
+                    'current_stock' => 'Quantidade no estoque',
+                    'created_at' => 'Dt. criação'
+                ];
+            @endphp
+
+            <x-sort
+                :list="$sortList"
+            ></x-sort>
 
         </div>
 
@@ -28,7 +37,7 @@
 
     <div class="buttons d-flex mt-2">
 
-        <a class="btn btn-sm btn-secondary me-2" href="{{ url('/products') }}">Limpar filtros</a>
+        <a class="btn btn-sm btn-secondary me-2" href="{{ route('products.index') }}">Limpar filtros</a>
 
         <button class="btn btn-sm btn-primary" type="submit">Atualizar</button>
 

@@ -14,7 +14,8 @@ class TransactionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => $this->faker->numerify(),
+            'total' =>$this->faker->numerify(),
         ];
     }
 }

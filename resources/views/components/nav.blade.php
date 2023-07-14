@@ -25,11 +25,6 @@
 				@else
 
                     <li>
-                        <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
-                    </li>
-
-
-                    <li>
                         <a class="nav-link" href="{{ route('categories.index') }}">Categorias</a>
                     </li>
 
@@ -42,7 +37,7 @@
                           <li><a class="dropdown-item" href="{{ route('productimages.index') }}">Imagens de produtos</a></li>
                           <li><a class="dropdown-item" href="{{ route('transactions.index') }}">Transações</a></li>
                           <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="#">Transações de produtos</a></li>
+                          <li><a class="dropdown-item" href="{{ route('transactionProducts.index') }}">Transações de produtos</a></li>
                         </ul>
                       </li>
 

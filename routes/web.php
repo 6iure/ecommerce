@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\StockOperationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,37 +19,25 @@ require __DIR__.'/resources/auth.php';
 
 Route::group(['middleware' => ['auth']], function() {
 
-    require __DIR__.'/resources/home.php';
-
     require __DIR__.'/resources/categories.php';
 
     require __DIR__.'/resources/products.php';
 
-    require __DIR__.'/resources/productimages.php';
+    require __DIR__.'/resources/productImages.php';
 
     require __DIR__.'/resources/transactions.php';
+
+    require __DIR__.'/resources/transactionProducts.php';
 
     Route::get('upload/image', [ProductImageController::class, 'ImageUpload'])->name('ImageUpload');
 
     Route::post('upload/image',[ProductImageController::class, 'ImageUploadStore'])->name('ImageUploadStore');
 
-});
+    // //Rotas para Operações de Estoque
+    // Route::get('stock-operation/index', [StockOperationController::class, 'stockOperation'])->name('stock-operation.index');
 
-Route::group([], function() {
+    // Route::get('stock-operation/create', [StockOperationController::class, 'stockOperation'])->name('stock-operation.create');
 
-   //Visualizar form para editar os produtos
-   Route::get('product/{id}/editar', ['uses' => 'App\Http\Controllers\ProductController@edit', 'role' => 'product.update']) ;
-
-   //Atualizar produto
-   Route::put('product', ['uses' => 'App\Http\Controllers\ProductController@edit', 'role' => 'product.update']);
-
-   //REmover uma produto
-   Route::delete('product', ['uses' => 'App\Http\Controllers\ProductController@delete', 'role' => 'product.delete']);
+    // Route::post('stock-operation', [StockOperationController::class, 'stockOperation'])->name('stock-operation.store');
 
 });
-
-// Route::group([], function(){
-
-//     Route::store('')
-
-// });

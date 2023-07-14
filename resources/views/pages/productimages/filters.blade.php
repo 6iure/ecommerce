@@ -1,4 +1,4 @@
-<form method="GET" action="{{ url('/productimages') }}">
+<form method="GET" action="{{ route('productimages') }}">
 
     <div class="row">
 
@@ -28,7 +28,7 @@
 
     <div class="buttons d-flex mt-2">
 
-        <a class="btn btn-sm btn-secondary me-2" href="{{ url('/productimages') }}">Limpar filtros</a>
+        <a class="btn btn-sm btn-secondary me-2" href="{{ route('productimages') }}">Limpar filtros</a>
 
         <button class="btn btn-sm btn-primary" type="submit">Atualizar</button>
 

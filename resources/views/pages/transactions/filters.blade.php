@@ -1,4 +1,4 @@
-<form method="GET" action="{{ url('/transactions') }}">
+<form method="GET" action="{{ route('transactions.index') }}" class="mb-3">
 
     <div class="row">
 
@@ -10,17 +10,23 @@
         </div>
 
         <div class="col-3">
-                @include('components.limit')
+            <x-limit/>
         </div>
 
 
         <div class="col-3">
 
-            @include('components.sort', [
-                'columns' => [
+            @php
+                $sortList = [
                     'id' => 'Id',
-                ]
-            ])
+                    'total' => 'Total',
+                    // 'created_at' => 'Dt. criação'
+                ];
+            @endphp
+
+            <x-sort
+                :list="$sortList"
+            ></x-sort>
 
         </div>
 
@@ -28,7 +34,7 @@
 
     <div class="buttons d-flex mt-2">
 
-        <a class="btn btn-sm btn-secondary me-2" href="{{ url('/transacations') }}">Limpar filtros</a>
+        <a class="btn btn-sm btn-secondary me-2" href="{{ route('transactions.index') }}">Limpar filtros</a>
 
         <button class="btn btn-sm btn-primary" type="submit">Atualizar</button>
 

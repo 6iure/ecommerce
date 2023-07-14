@@ -1,4 +1,4 @@
-<form method="GET" action="{{ route('categories.index') }}" class="mb-3">
+<form method="GET" action="{{ route('transactionProducts.index') }}" class="mb-3">
 
     <div class="row">
 
@@ -17,9 +17,10 @@
 
             @php
                 $sortList = [
-                    'id' => 'Id',
-                    'name' => 'Nome',
-                    'created_at' => 'Data de criação',
+                    'amount' => 'Quantidade',
+                    'price' => 'Preço',
+                    'total' => 'Total',
+                    'created_at' => 'Data de criação'
                 ];
             @endphp
 
@@ -33,7 +34,7 @@
 
     <div class="buttons d-flex mt-2">
 
-        <a class="btn btn-sm btn-secondary me-2" href="{{ route('categories.index') }}">Limpar filtros</a>
+        <a class="btn btn-sm btn-secondary me-2" href="{{ route('transactionProducts.index') }}">Limpar filtros</a>
 
         <button class="btn btn-sm btn-primary" type="submit">Atualizar</button>
 

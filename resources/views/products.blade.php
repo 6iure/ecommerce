@@ -9,7 +9,7 @@
 <body>
     <ul>
         <li>
-            <a href="{{ url('images') }}">Imagens do produto</a>
+            <a href="{{ route('images') }}">Imagens do produto</a>
         </li>
         <li>
             <a href="{{ url('operations') }}">Operações de Estoque</a>
@@ -18,7 +18,7 @@
             <a href="{{ url('transactions') }}">Transações</a>
         </li>
         <li>
-            <a href="{{ url('tproducts') }}">Transações de Produtos</a>
+            <a href="{{ url('transactionProducts') }}">Transações de Produtos</a>
         </li>
     </ul>
 </body>

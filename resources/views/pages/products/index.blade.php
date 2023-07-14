@@ -10,55 +10,60 @@
 
         @include('pages.products.filters')
 
-        <div class="table-responsive">
+        <x-btn-create :route="route('products.create')">Criar Produto</x-btn-create>
 
+        @if ($products->count() > 0)
+            <div class="table-responsive">
 
-            <table class="table table-striped mt-3">
+                <table class="table table-striped mt-3">
 
-                <thead class="table">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Preço</th>
-                        <th>Quantidade no estoque</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach ($products as $product)
-
+                    <thead class="table">
                         <tr>
-                            <td>{{ $product->id }}</td>
-                            <td>{{ $product->name }}</td>
-                            <td>{{ $product->description }}</td>
-                            <td>{{ $product->price }}</td>
-                            <td>{{ $product->current_stock }}</td>
-
-                            <td>
-
-                                <div class="buttons d-flex">
-
-                                    <a class="btn btn-sm btn-primary me-3 " href="{{ url('/product/'.$product->id .'/editar') }}">Editar produto</a>
-
-                                    @include('components.delete', [
-                                        'url' => '/product',
-                                        'id' => $product->id,
-                                        'text' => 'Remover produto',
-                                    ])
-
-                                </div>
-
-                            </td>
-
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Preço</th>
+                            <th>Quantidade no estoque</th>
+                            <th>Dt. criação</th>
+                            <th>Ações</th>
                         </tr>
+                    </thead>
 
-                    @endforeach
+                    <tbody>
 
-                </tbody>
-            </table>
+                        @foreach ($products as $product)
 
-        </div>
+                            <tr>
+                                <td>{{ $product->id }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->description }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>{{ $product->current_stock }}</td>
+                                <td>{{ $product->created_at }}</td>
+                                <td>
+                                    <x-buttons>
+
+                                        <x-btn-edit :route="route('products.edit', ['product' => $product->id])">Editar produto</x-btn-edit>
+
+                                        <x-btn-delete :route="route('products.destroy', ['product' => $product->id])">Remover produto</x-btn-delete>
+
+                                    </x-buttons>
+                                <td>
+                            </tr>
+
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+                {!! $products->appends(Request::except('page'))->links() !!}
+
+            </div>
+
+        @else
+            <x-empty-message />
+        @endif
+
     </div>
 
 @endsection

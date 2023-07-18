@@ -6,7 +6,9 @@ use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Validator as ValidationValidator;
 
@@ -21,7 +23,6 @@ use Illuminate\Validation\Validator as ValidationValidator;
 
  class ProductController extends Controller
 {
-
     /**
      * Listar todos os produtos
      *
@@ -66,20 +67,6 @@ use Illuminate\Validation\Validator as ValidationValidator;
         $product = new Product();
 
         return $this->storeOrUpdate($product, $request);
-
-        //Upload de imagens
-            if($request->hasFile('customFile') && $request->file('customFile')->isValid()) {
-
-            $requestFile = $request->customFile;
-
-            $extension = $requestFile->extension();
-
-            $fileName = md5($requestFile->customFile->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
-            $request->customFIle->move(public_path('img/storage'), $fileName);
-
-        }
-
     }
 
     /**
@@ -91,7 +78,6 @@ use Illuminate\Validation\Validator as ValidationValidator;
     public function edit(Product $product):View {
 
         return $this->form($product);
-
     }
 
     /**
@@ -149,7 +135,7 @@ use Illuminate\Validation\Validator as ValidationValidator;
 
         $validator = $this->validator($request);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
 
             return redirect()
                 ->back()
@@ -162,7 +148,6 @@ use Illuminate\Validation\Validator as ValidationValidator;
         return redirect()
             ->route('products.index')
             ->with('success', 'Produto salvo com sucesso!');
-
     }
 
     /**
@@ -180,6 +165,7 @@ use Illuminate\Validation\Validator as ValidationValidator;
             'description' => ['required', 'string', 'max:180'],
             'price' => ['required', 'integer'],
             'current_stock' => ['required', 'integer'],
+            'file' => ['required', 'file', 'image', 'min:100', 'max:500']
         ];
 
         $validator = Validator::make($data, $rules);
@@ -202,16 +188,33 @@ use Illuminate\Validation\Validator as ValidationValidator;
      */
     private function save(Product $product, Request $request) {
 
-
-        // dd($request->all());
+        list($imagePath, $imageMimetype, $imageSize) = $this->saveFile($request->file);
 
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
         $product->current_stock = $request->current_stock;
-        $product->image_path = $request->image_path;
-        $product->image_mimetype = $request->image_mimetype;
-        $product->image_size = $request->image_size;
+        $product->image_path = $imagePath;
+        $product->image_mimetype = $imageMimetype;
+        $product->image_size = $imageSize;
         $product->save();
+    }
+
+    private function saveFile(UploadedFile $file): array {
+
+        dd($file);
+        $path = 'products';
+
+        $extension = $file->getClientOriginalExtension();
+
+        $name = uniqid() . '.' . $extension;
+
+        Storage::putFileAs($path, $file, $name);
+
+        return [
+            $path . '/' . $name,
+            $file->getClientMimeType(),
+            intval($file->getSize() / 1024)
+        ];
     }
 }

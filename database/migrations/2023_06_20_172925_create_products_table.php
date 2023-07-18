@@ -21,6 +21,9 @@ class CreateProductsTable extends Migration
             $table->string('description', 180);
             $table->integer('price');
             $table->integer('current_stock')->default(0);
+            $table->string('image_path');
+            $table->string('image_mimetype');
+            $table->integer('image_size');
             $table->timestamps();
             $table->softDeletes();
         });

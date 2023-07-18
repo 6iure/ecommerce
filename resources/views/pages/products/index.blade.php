@@ -24,6 +24,9 @@
                             <th>Descrição</th>
                             <th>Preço</th>
                             <th>Quantidade no estoque</th>
+                            <th>URL da imagem</th>
+                            <th>Tipo de arquivo</th>
+                            <th>Tamanho da imagem</th>
                             <th>Dt. criação</th>
                             <th>Ações</th>
                         </tr>
@@ -39,6 +42,9 @@
                                 <td>{{ $product->description }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->current_stock }}</td>
+                                <td>{{ $product->image_path }}</td>
+                                <td>{{ $product->image_mimetype }}</td>
+                                <td>{{ $product->image_size }}</td>
                                 <td>{{ $product->created_at }}</td>
                                 <td>
                                     <x-buttons>

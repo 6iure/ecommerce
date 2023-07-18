@@ -1,4 +1,4 @@
-<form method="GET" action="{{ route('transactionProducts.index') }}" class="mb-3">
+<form method="GET" action="{{ route('transaction-products.index') }}" class="mb-3">
 
     <div class="row">
 
@@ -34,7 +34,7 @@
 
     <div class="buttons d-flex mt-2">
 
-        <a class="btn btn-sm btn-secondary me-2" href="{{ route('transactionProducts.index') }}">Limpar filtros</a>
+        <a class="btn btn-sm btn-secondary me-2" href="{{ route('transaction-products.index') }}">Limpar filtros</a>
 
         <button class="btn btn-sm btn-primary" type="submit">Atualizar</button>
 

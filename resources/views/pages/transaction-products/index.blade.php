@@ -2,15 +2,15 @@
 
 @section('content')
 
-    <div id="transactionProducts-index-page" class="page">
+    <div id="transaction-products-index-page" class="page">
 
         @include('components.alert')
 
         <h1>Transações de Produtos</h1>
 
-        @include('pages.transactionProducts.filters')
+        @include('pages.transaction-products.filters')
 
-        <x-btn-create :route="route('transactionProducts.create')">Criar transação de produto</x-btn-create>
+        <x-btn-create :route="route('transaction-products.create')">Criar transação de produto</x-btn-create>
 
         @if ($tProducts->count() > 0)
 
@@ -43,9 +43,9 @@
 
                                     <x-buttons>
 
-                                        <x-btn-edit :route="route('transactionProducts.edit', ['transactionProduct' => $tProduct->id])">Editar Transação de Produto </x-btn-edit>
+                                        <x-btn-edit :route="route('transaction-products.edit', ['transactionProduct' => $tProduct->id])">Editar Transação de Produto </x-btn-edit>
 
-                                        <x-btn-delete :route="route('transactionProducts.destroy', ['transactionProduct' => $tProduct->id])"> Deletar Transação de Produto </x-btn-delete>
+                                        <x-btn-delete :route="route('transaction-products.destroy', ['transactionProduct' => $tProduct->id])"> Deletar Transação de Produto </x-btn-delete>
 
                                     </x-buttons>
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="page page-transactionProducts page-form">
+    <div class="page page-transaction-products page-form">
 
         @include('components.alert')
 
@@ -13,8 +13,8 @@
             $method = $tProducts->id ? 'PUT' : 'POST';
 
             $route = $tProducts->id ?
-                route('transactionProducts.update', $tProducts->id) :
-                route('transactionProducts.store');
+                route('transaction-products.update', $tProducts->id) :
+                route('transaction-products.store');
 
         @endphp
 
@@ -40,7 +40,7 @@
 
             <x-buttons>
 
-                <a class="btn btn-secondary" href="{{ route('transactionProducts.index') }}">Voltar</a>
+                <a class="btn btn-secondary" href="{{ route('transaction-products.index') }}">Voltar</a>
 
                 <button class="btn btn-primary" type="submit">Enviar</button>
 

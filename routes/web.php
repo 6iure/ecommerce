@@ -21,23 +21,17 @@ Route::group(['middleware' => ['auth']], function() {
 
     require __DIR__.'/resources/categories.php';
 
+    //todo colocar o uploadImages dentro do index e form de produtos, salvar no db tb, por enquanto mudei form e filters, index e form do products.
     require __DIR__.'/resources/products.php';
 
     require __DIR__.'/resources/productImages.php';
 
     require __DIR__.'/resources/transactions.php';
 
-    require __DIR__.'/resources/transactionProducts.php';
+    //todo melhorar nome da rota -> usar transaction-products : ok
+    require __DIR__.'/resources/transaction-products.php';
 
     Route::get('upload/image', [ProductImageController::class, 'ImageUpload'])->name('ImageUpload');
 
     Route::post('upload/image',[ProductImageController::class, 'ImageUploadStore'])->name('ImageUploadStore');
-
-    // //Rotas para Operações de Estoque
-    // Route::get('stock-operation/index', [StockOperationController::class, 'stockOperation'])->name('stock-operation.index');
-
-    // Route::get('stock-operation/create', [StockOperationController::class, 'stockOperation'])->name('stock-operation.create');
-
-    // Route::post('stock-operation', [StockOperationController::class, 'stockOperation'])->name('stock-operation.store');
-
 });

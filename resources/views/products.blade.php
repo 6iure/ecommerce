@@ -18,7 +18,7 @@
             <a href="{{ url('transactions') }}">Transações</a>
         </li>
         <li>
-            <a href="{{ url('transactionProducts') }}">Transações de Produtos</a>
+            <a href="{{ url('transaction-products') }}">Transações de Produtos</a>
         </li>
     </ul>
 </body>

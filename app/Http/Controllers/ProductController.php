@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Validator as ValidationValidator;
 
@@ -65,6 +66,19 @@ use Illuminate\Validation\Validator as ValidationValidator;
         $product = new Product();
 
         return $this->storeOrUpdate($product, $request);
+
+        //Upload de imagens
+            if($request->hasFile('customFile') && $request->file('customFile')->isValid()) {
+
+            $requestFile = $request->customFile;
+
+            $extension = $requestFile->extension();
+
+            $fileName = md5($requestFile->customFile->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $request->customFIle->move(public_path('img/storage'), $fileName);
+
+        }
 
     }
 
@@ -188,14 +202,16 @@ use Illuminate\Validation\Validator as ValidationValidator;
      */
     private function save(Product $product, Request $request) {
 
+
+        // dd($request->all());
+
         $product->name = $request->name;
-
         $product->description = $request->description;
-
         $product->price = $request->price;
-
         $product->current_stock = $request->current_stock;
-
+        $product->image_path = $request->image_path;
+        $product->image_mimetype = $request->image_mimetype;
+        $product->image_size = $request->image_size;
         $product->save();
     }
 }

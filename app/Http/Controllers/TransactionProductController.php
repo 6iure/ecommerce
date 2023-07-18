@@ -30,7 +30,7 @@ class TransactionProductController extends Controller
             'tProducts' => $tProducts
         ];
 
-        return view('pages.transactionProducts.index', $data);
+        return view('pages.transaction-products.index', $data);
     }
 
     /**
@@ -64,11 +64,9 @@ class TransactionProductController extends Controller
      * @param TransactionProduct $tProducts
      * @return View
      */
-    public function edit(TransactionProduct $tProducts, int $id): View {
+    public function edit(TransactionProduct $tProducts): View {
 
         return $this->form($tProducts);
-
-        $tProducts = TransactionProduct::find($id);
 
         // return $this->form($tProducts);
     }
@@ -98,7 +96,7 @@ class TransactionProductController extends Controller
         $tProducts->delete();
 
         return redirect()
-            ->route('transactionProducts.index')
+            ->route('transaction-products.index')
             ->with('success', 'Transação de produto excluída!');
     }
 
@@ -114,7 +112,7 @@ class TransactionProductController extends Controller
             'tProducts' => $tProducts
         ];
 
-        return view('pages.transactionProducts.form', $data);
+        return view('pages.transaction-products.form', $data);
     }
 
     /**
@@ -139,7 +137,7 @@ class TransactionProductController extends Controller
             $this->save($tProducts, $request);
 
             return redirect()
-                ->route('transactionProducts.index')
+                ->route('transaction-products.index')
                 ->with('success', 'Transação de produto salva!');
     }
 

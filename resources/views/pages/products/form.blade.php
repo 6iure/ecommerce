@@ -18,7 +18,7 @@
 
        @endphp
 
-        <form method="POST" action="{{ $route }}">
+        <form method="POST" action="{{ $route }}" enctype="multipart/form-data">
 
             @csrf
 
@@ -37,6 +37,9 @@
 
                 <label for="">Quantidade no estoque</label>
                 <input type="number" name="current_stock" class="form-control" value="{{ old('current_stock', $product->current_stock) }}" required />
+
+                <label for="form-label" for="customFile">Insira uma imagem para o produto</label>
+                <input type="file" name="file" class="form-control" id="customFile">
 
             </div>
 

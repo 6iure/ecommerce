@@ -34,7 +34,10 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'current_stock'
+        'current_stock',
+        'image_path',
+        'image_mimetype',
+        'image_size'
     ];
 
     public function scopeSearch($query, Request $request) {

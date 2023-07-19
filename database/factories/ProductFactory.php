@@ -14,15 +14,6 @@ class ProductFactory extends Factory
     public function definition()
     {
 
-        // $image = $this->faker->image(
-        //     dir: storage_path('app'),
-        //     width: 250,
-        //     height: 250,
-        //     fullPath: false
-        // );
-
-        // $imageUrl = $this->faker->imageUrl(width: 620, height: 480);
-
         return [
             'name' => $this->faker->safeColorName(),
             'description' => $this->faker->safeColorName(),

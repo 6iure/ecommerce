@@ -202,9 +202,6 @@ use Illuminate\Validation\Validator as ValidationValidator;
      */
     private function save(Product $product, Request $request) {
 
-
-        // dd($request->all());
-
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;

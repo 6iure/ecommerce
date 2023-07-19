@@ -43,9 +43,9 @@
 
                                     <x-buttons>
 
-                                        <x-btn-edit :route="route('transaction-products.edit', ['transactionProduct' => $tProduct->id])">Editar Transação de Produto </x-btn-edit>
+                                        <x-btn-edit :route="route('transaction-products.edit', ['transaction_product' => $tProduct->id])">Editar Transação de Produto </x-btn-edit>
 
-                                        <x-btn-delete :route="route('transaction-products.destroy', ['transactionProduct' => $tProduct->id])"> Deletar Transação de Produto </x-btn-delete>
+                                        <x-btn-delete :route="route('transaction-products.destroy', ['transaction_product' => $tProduct->id])"> Deletar Transação de Produto </x-btn-delete>
 
                                     </x-buttons>
 

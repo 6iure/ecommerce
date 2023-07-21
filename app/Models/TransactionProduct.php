@@ -21,9 +21,7 @@ class TransactionProduct extends Model
     public function scopeSearch($query, Request $request) {
 
         if ($request->name) {
-            $query->where('amount', $request->amount);
-            $query->where('price', $request->price);
-            $query->where('total', $request->total);
+            $query->where('name', $request->name);
         }
 
     }

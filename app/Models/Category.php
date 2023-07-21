@@ -26,7 +26,17 @@ class Category extends Model
         // TODO fazer filtros, joins, selects, etc...
 
         if ($request->name) {
-            $query->where('name', $request->name);
+            $query->where('name', 'ilike', '%'. $request->name);
         }
+
+        // if ($request->search) {
+
+        //     $search = trim($request->search);
+
+        //     $query->where(function($q) use ($search) {
+        //         $q->orWhere('m.name', 'ilike', '%'. $search. '%');
+        //     });
+
+        // }
     }
 }

@@ -4,7 +4,6 @@
 
     <div class="page page-categories page-form" >
 
-        {{-- <x-alert> </x-alert> --}}
         @include('components.alert')
 
         <h1>Formulário de Categorias</h1>

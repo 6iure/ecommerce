@@ -21,14 +21,14 @@ Route::group(['middleware' => ['auth']], function() {
 
     require __DIR__.'/resources/categories.php';
 
-    //todo colocar o uploadImages dentro do index e form de produtos, salvar no db tb, por enquanto mudei form e filters, index e form do products.
     require __DIR__.'/resources/products.php';
 
     require __DIR__.'/resources/productImages.php';
 
     require __DIR__.'/resources/transactions.php';
 
-    //todo melhorar nome da rota -> usar transaction-products : ok
+    require __DIR__.'/resources/stock-operations.php';
+
     require __DIR__.'/resources/transaction-products.php';
 
     Route::get('upload/image', [ProductImageController::class, 'ImageUpload'])->name('ImageUpload');

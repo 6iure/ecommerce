@@ -34,9 +34,8 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                           <li><a class="dropdown-item" href="{{ route('products.index') }}">Produtos</a></li>
-                          {{-- <li><a class="dropdown-item" href="{{ route('productimages.index') }}">Imagens de produtos</a></li> --}}
                           <li><a class="dropdown-item" href="{{ route('transactions.index') }}">Transações</a></li>
-                          {{-- <li><hr class="dropdown-divider"></li> --}}
+                          <li><a class="dropdown-item" href="{{ route('stock-operations.index') }} ">Operações de Estoque</a></li>
                           <li><a class="dropdown-item" href="{{ route('transaction-products.index') }}">Transações de produtos</a></li>
                         </ul>
                       </li>

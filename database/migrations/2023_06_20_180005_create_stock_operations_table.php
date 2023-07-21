@@ -15,9 +15,9 @@ class CreateStockOperationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stock_operations', function (Blueprint $table) {
+        Schema::create('stock-operations', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(Product::class)->nullable();
             $table->enum('operation_id', StockOperationEnum::getValues());
             $table->integer('amount');
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateStockOperationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stock_operations');
+        Schema::dropIfExists('stock-operations');
     }
 }

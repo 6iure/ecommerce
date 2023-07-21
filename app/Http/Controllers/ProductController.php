@@ -165,7 +165,7 @@ use Illuminate\Validation\Validator as ValidationValidator;
             'description' => ['required', 'string', 'max:180'],
             'price' => ['required', 'integer'],
             'current_stock' => ['required', 'integer'],
-            'file' => ['required', 'file', 'image', 'min:100', 'max:500']
+            'file' => ['required', 'file', 'image', 'min:1', 'max:500']
         ];
 
         $validator = Validator::make($data, $rules);
@@ -202,7 +202,6 @@ use Illuminate\Validation\Validator as ValidationValidator;
 
     private function saveFile(UploadedFile $file): array {
 
-        dd($file);
         $path = 'products';
 
         $extension = $file->getClientOriginalExtension();

@@ -19,6 +19,5 @@ class Transaction extends Model
         if ($request->name) {
             $query->where('name', $request->name);
         }
-
     }
 }

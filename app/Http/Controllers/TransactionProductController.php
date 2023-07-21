@@ -68,7 +68,6 @@ class TransactionProductController extends Controller
 
         return $this->form($tProducts);
 
-        // return $this->form($tProducts);
     }
 
 

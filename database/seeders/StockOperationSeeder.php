@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\StockOperation;
 use Illuminate\Database\Seeder;
 
 class StockOperationSeeder extends Seeder
@@ -13,6 +14,8 @@ class StockOperationSeeder extends Seeder
      */
     public function run()
     {
-        //
+        StockOperation::factory()
+            ->count(100)
+            ->create();
     }
 }

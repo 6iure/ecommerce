@@ -99,7 +99,7 @@ class TransactionController extends Controller {
         $data = $request->all();
 
         $rules = [
-            'total' => ['required', 'integer'],
+            'total' => ['required', 'float'],
         ];
 
         $validator = Validator::make($data, $rules);

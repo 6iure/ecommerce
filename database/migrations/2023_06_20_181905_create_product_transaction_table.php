@@ -20,8 +20,8 @@ class CreateProductTransactionTable extends Migration
             $table->foreignIdFor(Transaction::class)->nullable();
             $table->foreignIdFor(Product::class)->nullable();
             $table->integer('amount');
-            $table->float('price'); //todo mudar todos os preços para double em vez de int
-            $table->float('total');
+            $table->double('price');
+            $table->double('total');
             $table->timestamps();
         });
     }

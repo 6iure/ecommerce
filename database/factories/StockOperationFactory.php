@@ -14,7 +14,8 @@ class StockOperationFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'operation_id' => random_int(1,2),
+            'amount' => $this->faker->numerify(),
         ];
     }
 }

@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->foreignIdFor(Category::class)->nullable();
             $table->string('name', 100);
             $table->string('description', 180);
-            $table->integer('price');
+            $table->double('price');
             $table->integer('current_stock')->default(0);
             $table->string('image_path');
             $table->string('image_mimetype');
